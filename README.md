@@ -1,2 +1,2 @@
-## Example RESTful API - Mongo
+RESTful API - Mongo
 

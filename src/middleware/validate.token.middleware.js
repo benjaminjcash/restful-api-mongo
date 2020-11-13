@@ -9,7 +9,6 @@ exports.validateToken = function(req, res, next) {
     });
     
     jwt.verify(token, jwtConfig.secret, function(err, decoded) {
-        console.log(decoded);
         if(err) return res.status(500).send({
             success: false,
             error: 'failed to authenticate token'

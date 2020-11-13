@@ -1,9 +1,7 @@
 const User = require('../models/user.model');
 
 exports.getUser = function(req, res) {
-    console.log(req.auth.id);
     User.findById(req.auth.id, function(err, data) {
-        console.log(data);
         if(err) return res.send({
             success: false,
             error: err

@@ -50,3 +50,21 @@ exports.login = function(req, res) {
         });
     });
 }
+
+exports.changePassword = function(req, res) {
+    const passwordHash = bcrypt.hashSync(req.body.password);
+    User.findByIdAndUpdate(req.auth.id, { password: passwordHash }, { new: true, useFindAndModify: false }, function(err, data) {
+        if(err)  return res.send({
+            success: false,
+            error: err
+        });
+        if(!data) return res.status(400).send({ 
+            success: false,
+            error: 'no user found' 
+        });
+        return res.json({
+            success: true,
+            data: data
+        });
+    });
+}

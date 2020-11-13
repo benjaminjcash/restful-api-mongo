@@ -18,7 +18,7 @@ exports.registerUser = function(req, res) {
         });
         return res.json({
             success: true,
-            data: data
+            message: 'registered user'
         });
     });
 }

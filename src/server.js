@@ -1,12 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require('cors');
 const itemRoutes = require("./routes/item.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const middleware = require("./middleware/errors.middleware");
-const app = express();
 const PORT = process.env.PORT || 3000;
+
+const app = express();
+app.use(cors());
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/restful-api-mongo', {

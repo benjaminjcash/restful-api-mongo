@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const itemRoutes = require("./routes/item.routes");
+const authRoutes = require("./routes/auth.routes");
+const userRoutes = require("./routes/user.routes");
 const middleware = require("./middleware/errors.middleware");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,9 +27,10 @@ db.once('open', function() {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/item", itemRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/item", itemRoutes);
 
-app.use(middleware.error204);
 app.use(middleware.error404);
 
 app.listen(PORT, function() {

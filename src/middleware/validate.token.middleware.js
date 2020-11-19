@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const jwtConfig = require('../jwt-config');
 const isTest = process.env.__TEST__;
 
-exports.validateToken = function(req, res, next) {
+exports.validateToken = (req, res, next) => {
     // if running tests, set test user id and skip authentication
     if(isTest) {
         req.auth = {
@@ -17,7 +17,7 @@ exports.validateToken = function(req, res, next) {
         error: 'no token provided'
     });
     
-    jwt.verify(token, jwtConfig.secret, function(err, decoded) {
+    jwt.verify(token, jwtConfig.secret, (err, decoded) => {
         if(err) return res.status(500).send({
             success: false,
             error: 'failed to authenticate token'

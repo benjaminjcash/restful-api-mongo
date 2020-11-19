@@ -17,6 +17,7 @@ describe('item API service', () => {
         chai.request(BASE_URL)
             .get(`/api/item/${itemId}`)
             .end((err, res) => {
+                console.log(res);
                 expect(res.status).to.be.equal(200);
                 expect(res.body._id).to.be.equal(itemId);
                 expect(res.body.name).to.be.equal("Test Item");

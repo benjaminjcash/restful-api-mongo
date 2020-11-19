@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "__TEST__='true' nodemon src/server.js",
+    "start": "nodemon src/server.js",
+    "start-test": "__TEST__='true' nodemon src/server.js",
     "test": "__TEST__='true' mocha ./tests/*"
   },
   "repository": {

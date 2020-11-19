@@ -1,7 +1,7 @@
 const User = require('../models/user.model');
 
-exports.getUser = function(req, res) {
-    User.findById(req.auth.id, function(err, data) {
+exports.getUser = (req, res) => {
+    User.findById(req.auth.id, (err, data) => {
         if(err) return res.send({
             success: false,
             error: err
@@ -17,8 +17,8 @@ exports.getUser = function(req, res) {
     });
 }
 
-exports.deleteUser = function(req, res) {
-    User.findByIdAndDelete(req.auth.id, function(err, data) {
+exports.deleteUser = (req, res) => {
+    User.findByIdAndDelete(req.auth.id, (err, data) => {
         if(err)  return res.send({
             success: false,
             error: err

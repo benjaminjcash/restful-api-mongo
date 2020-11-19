@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwtconfig = require('../jwt-config');
 const User = require('../models/user.model');
 
-exports.registerUser = function(req, res) {
+exports.registerUser = (req, res) => {
     const passwordHash = bcrypt.hashSync(req.body.password);
     const newUser = new User({
         username: req.body.username,
@@ -11,7 +11,7 @@ exports.registerUser = function(req, res) {
         name: req.body.name,
         email: req.body.email
     });
-    newUser.save(function(err, data) {
+    newUser.save((err, data) => {
         if(err) return res.send({
             success: false,
             error: err
@@ -23,8 +23,8 @@ exports.registerUser = function(req, res) {
     });
 }
 
-exports.login = function(req, res) {
-    User.findOne({ username: req.body.username }, '+password', function(err, data) {
+exports.login = (req, res) => {
+    User.findOne({ username: req.body.username }, '+password', (err, data) => {
         if(err) res.send({
             success: false,
             error: err
@@ -33,7 +33,7 @@ exports.login = function(req, res) {
             success: false,
             error: 'no user found' 
         });
-        bcrypt.compare(req.body.password, data.password, function(err, valid) {
+        bcrypt.compare(req.body.password, data.password, (err, valid) => {
             if(err) return res.send({
                 success: false,
                 error: err
@@ -51,9 +51,9 @@ exports.login = function(req, res) {
     });
 }
 
-exports.changePassword = function(req, res) {
+exports.changePassword = (req, res) => {
     const passwordHash = bcrypt.hashSync(req.body.password);
-    User.findByIdAndUpdate(req.auth.id, { password: passwordHash }, { new: true, useFindAndModify: false }, function(err, data) {
+    User.findByIdAndUpdate(req.auth.id, { password: passwordHash }, { new: true, useFindAndModify: false }, (err, data) => {
         if(err)  return res.send({
             success: false,
             error: err

@@ -35,8 +35,8 @@ exports.updateItem = function(req, res) {
 }
 
 exports.deleteItem = function(req, res) {
-    Item.deleteOne(
-        { _id: req.params.itemId },
+    Item.findByIdAndDelete(
+        req.params.itemId,
         function(err) {
             if(err) res.send(err);
             res.json({ msg: "Deleted Successfully." });

@@ -7,15 +7,15 @@ const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const middleware = require("./middleware/errors.middleware");
 const PORT = process.env.PORT || 3000;
-
+const DB_URL = process.env.__TEST__ ? 'mongodb://localhost/restful-api-mongo-test' : 'mongodb://localhost/restful-api-mongo';
 const app = express();
 app.use(cors());
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/restful-api-mongo', {
+mongoose.connect(DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
+}, { useFindAndModify: false });
 
 const db = mongoose.connection;
 db.on('error', function(err) {

@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "__TEST__='true' nodemon src/server.js",
+    "test": "__TEST__='true' mocha ./tests/*"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,9 @@
     "mongoose": "^5.10.12"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.6"
   }
 }

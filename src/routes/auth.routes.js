@@ -1,11 +1,12 @@
 const express = require('express');
-const { validateToken } = require('../middleware/validate.token.middleware');
-const { registerUser, login, changePassword } = require('../controllers/auth.controller');
+const { registerUser, login, logout, token } = require('../controllers/auth.controller');
 
 const authRoutes = express.Router();
 
-authRoutes.post('/register', registerUser);
-authRoutes.post('/login', login);
-authRoutes.post('/changepassword', validateToken, changePassword);
+authRoutes
+    .post('/register', registerUser)
+    .post('/login', login)
+    .post('/token', token)
+    .post('/logout', logout);
 
 module.exports = authRoutes;

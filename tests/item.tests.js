@@ -4,7 +4,7 @@ const BASE_URL = 'http://localhost:3000';
 chai.use(chaiHttp);
 const expect = chai.expect;
 
-describe('item API service', () => {
+describe('Item API service', () => {
     /**
         "_id": "5fb5ed9c17e6ba18eabb8594",
         "name": "Test Item",
@@ -12,16 +12,15 @@ describe('item API service', () => {
         "created_date": "2020-11-19T03:09:35.229Z",
         "__v": 0
      */
-    it('should get all fields on an item', (done) => {
+    it('should get an item', (done) => {
         const itemId = '5fb5ed9c17e6ba18eabb8594';
         chai.request(BASE_URL)
             .get(`/api/item/${itemId}`)
             .end((err, res) => {
-                console.log(res);
                 expect(res.status).to.be.equal(200);
-                expect(res.body._id).to.be.equal(itemId);
-                expect(res.body.name).to.be.equal("Test Item");
-                expect(res.body.type).to.be.equal("READ");
+                expect(res.body.data._id).to.be.equal(itemId);
+                expect(res.body.data.name).to.be.equal("Test Item");
+                expect(res.body.data.type).to.be.equal("READ");
                 done();
             });
     });
@@ -59,7 +58,7 @@ describe('item API service', () => {
             .get(`/api/item/${itemId}`)
             .end((err, res) => {
                 expect(res.status).to.be.equal(200);
-                let current = parseInt(res.body.name);
+                let current = parseInt(res.body.data.name);
                 let next = current + 1;
                 const update = {
                     "name": `${next}`
@@ -68,12 +67,14 @@ describe('item API service', () => {
                     .put(`/api/item/${itemId}`)
                     .send(update)
                     .end((err, res) => {
-                        let updated = parseInt(res.body.name);
+                        let updated = parseInt(res.body.data.name);
                         expect(updated).to.equal(current + 1);
                         done();
                     });
             });
     });
+
+    
 
     /**
         "_id": "xxxxxxxxxxxxxxxxxxxxxx",
@@ -99,4 +100,5 @@ describe('item API service', () => {
             });
         });
     });
+    
 });

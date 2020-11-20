@@ -1,11 +1,12 @@
-const { createItem, getItem, updateItem, deleteItem } = require("../controllers/item.controller");
 const express = require("express");
-const { validateToken } = require('../middleware/validate.token.middleware');
+const { createItem, getAllItems, getItem, updateItem, deleteItem } = require("../controllers/item.controller");
+const validateToken = require('../middleware/auth.middleware');
 
 const itemRoutes = express.Router();
 
 itemRoutes
     .post("/", validateToken, createItem)
+    .get("/", validateToken, getAllItems)
     .get("/:itemId", validateToken, getItem)
     .put("/:itemId", validateToken, updateItem)
     .delete("/:itemId", validateToken, deleteItem);

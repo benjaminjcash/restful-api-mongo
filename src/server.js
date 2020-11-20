@@ -16,7 +16,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}, { useFindAndModify: false });
+});
 
 const db = mongoose.connection;
 db.on('error', function(err) {

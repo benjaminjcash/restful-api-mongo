@@ -65,7 +65,8 @@ exports.login = async (req, res) => {
                 token_type: 'bearer',
                 access_token: accessToken,
                 expires_in: 86400,
-                refresh_token: refreshToken
+                refresh_token: refreshToken,
+                name: user.name
             });
     }
     catch(err) {
